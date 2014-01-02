@@ -38,3 +38,4 @@ cover
 #mac files
 .DS_Store
 report.html
+node_modules

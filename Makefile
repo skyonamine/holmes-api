@@ -15,6 +15,7 @@ tox:
 
 setup:
 	@pip install -U -e .\[tests\]
+	@npm install phantomas
 
 kill_redis:
 	-redis-cli -p 7575 shutdown

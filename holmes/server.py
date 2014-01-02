@@ -101,12 +101,12 @@ class HolmesApiServer(Server):
         self.application.violation_definitions = {}
 
         for facter in self.application.facters:
-            self.application.fact_definitions.update(facter.get_fact_definitions())
+            self.application.fact_definitions.update(facter.get_fact_definitions(self.application))
 
         self._insert_keys(self.application.fact_definitions)
 
         for validator in self.application.validators:
-            self.application.violation_definitions.update(validator.get_violation_definitions())
+            self.application.violation_definitions.update(validator.get_violation_definitions(self.application))
 
         self._insert_keys(self.application.violation_definitions)
 

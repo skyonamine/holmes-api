@@ -32,10 +32,10 @@ class PhantomasFacter(Facter):
         for metric in self.config['metrics']:
             definitions['page.phantomas.%s' % metric] = {
                 'title': 'Phantomas metrics - %s',
-                'description':  lambda value: '%d' % value
+                'description': lambda value: '%d' % value
             }
         if self.config['notices']:
-            definitions['page.phatomas.notices'] = {
+            definitions['page.phantomas.notices'] = {
                 'title': 'Phantomas notices - Time spent on backend / frontend',
                 'description': lambda value: '%d / %d' % value
             }
