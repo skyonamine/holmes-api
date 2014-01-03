@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from holmes.facters import Facter
+from holmes.facters.phantomas_info import phantomas_metrics
 import json
 import subprocess
-import threading
 import re
 
 NOTICES_PATTERN = re.compile(r'Time spent on backend / frontend: (\d+)% / (\d+)%')
@@ -29,16 +29,15 @@ class PhantomasFacter(Facter):
     @classmethod
     def get_fact_definitions(cls):
         definitions = {}
-        for metric in self.config['metrics']:
+        for metric in phantomas_metrics:
             definitions['page.phantomas.%s' % metric] = {
-                'title': 'Phantomas metrics - %s',
+                'title': 'Phantomas metrics - %s' % metric,
                 'description': lambda value: '%d' % value
             }
-        if self.config['notices']:
-            definitions['page.phantomas.notices'] = {
-                'title': 'Phantomas notices - Time spent on backend / frontend',
-                'description': lambda value: '%d / %d' % value
-            }
+        definitions['page.phantomas.notices'] = {
+            'title': 'Phantomas notices - Time spent on backend / frontend',
+            'description': lambda value: '%d / %d' % value
+        }
         return definitions
 
     def parse_metrics(self, proc):
